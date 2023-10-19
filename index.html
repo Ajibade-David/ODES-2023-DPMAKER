@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="images-removebg-preview.png">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <main class="form-GetDp">
+        <div class="baseImg-wrap">
+            <section id="content">
+                <img src="Pictures/ODES GetDP-1.jpg" class="w-100">
+                <div class="myImage rounded-0_" id="myImage">
+                    <img id="myImageTag" src="Pictures/plus.png" alt="myImageTag" height="105" class="w-auto h-100"/>
+                </div>
+                <div class="nameOut"></div>
+            </section>
+        </div>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            <h1 class="h5 mt-3 mb-3 fw-bold text-light ms-5" style="text-align: center; text-transform: uppercase;">Create Your Personalized DP</h1>
+            <div class="alert alert-danger my-2 text-center py-2" id="showEmptyErrorMessage" style="display: none">
+                Please fill in all spaces
+            </div>
+            <div class="form-floating mb-1">
+                <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Enter your name" required>
+                <label for="inputName">Enter your name</label>
+            </div>
+            <div class="custom-file d-block w-100 mb-2">
+                <input type="file" name="file" class="custom-file-input form-control" id="fileDoc" required>
+            </div>
+            <div class="advance-panel row">
+                <div class="col-6">
+                    <div class="form-floating mb-1">
+                        <select class="form-select" id="color" name="color">
+                            <option value="#ff8200">Default Color</option>
+                            <option value="#2798D4">Picton Blue</option>
+                            <option value="#71A6D2">Iceberg</option>
+                            <option value="#FF8C00">Dark Orange</option>
+                            <option value="#FFBF00">Amber</option>
+                            <option value="#8DB600">Apple Green</option>
+                        </select>
+                        <label for="color">Set Custom Color</label>
+                    </div>
+                </div><!--//Color-->
+                <div class="col-6">
+                    <div class="form-floating mb-1">
+                        <select class="form-select" id="quality" name="quality">
+                            <option value="100">100% [large Image size]</option>
+                            <option value="90">90%</option>
+                            <option value="80">80%</option>
+                            <option value="70" selected>70%</option>
+                            <option value="60">60%</option>
+                        </select>
+                        <label for="quality">Output Size Ratio</label>
+                    </div>
+                </div><!--//Quality-->
+            </div>
+        </form>
+        <button class="download-button w-100 btn btn-lg mt-3" onclick="downloadDivAsImage()" style="background-color: #EA9401;">Make My DP</button>
+    </main>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
+<script>
+    $('#color').on('change', function(){
+        var color = $(this).val();
+        $('#inputName').css('color', color);
+        $('.nameOut').css('color', color); // Change the color of the name display as well
+    });
+
+    function downloadDivAsImage() {
+        var inputName = document.getElementById("inputName");
+        var fileDoc = document.getElementById("fileDoc");
+
+        if (inputName.value !== "" && fileDoc.files.length > 0) {
+            document.getElementById("showEmptyErrorMessage").style.display = "none";
+
+            html2canvas(document.getElementById('content')).then(function(canvas) {
+                var imgData = canvas.toDataURL('image/png');
+                var downloadLink = document.createElement('a');
+                downloadLink.href = imgData;
+                downloadLink.download = 'dp.png';
+                downloadLink.click();
+
+                inputName.value = "";
+                fileDoc.value = null;
+            });
+        } else {
+            document.getElementById("showEmptyErrorMessage").style.display = "block";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var fileDoc = document.getElementById("fileDoc");
+        var myImageTag = document.getElementById("myImageTag");
+
+        fileDoc.addEventListener("change", function(evt) {
+            var file = fileDoc.files[0];
+            if (file) {
+                myImageTag.src = URL.createObjectURL(file);
+            }
+        });
+
+        document.getElementById("inputName").addEventListener("input", function(e) {
+            var nameOut = document.querySelector(".nameOut");
+            nameOut.textContent = e.target.value;
+        });
+    });
+    $("#inputName").on("keyup change", function(e) {
+        $(".nameOut").text($(this).val());
+    });
+
+    $("#myImage").click(() => {
+        $("#fileDoc").click();
+    });
+</script>
+</html>
