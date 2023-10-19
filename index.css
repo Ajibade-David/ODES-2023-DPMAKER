@@ -16,7 +16,7 @@ body {
     max-width: 720px;
     padding: 15px;
     margin: auto;
-    background-color:#27160E;
+    background-color:#076377;
     border-radius: 5px;
     position: relative;
 }
@@ -96,7 +96,7 @@ body {
     width: auto;
     height: 380px;
 }
-.bg-fb{background-color:#EA9401}
+.bg-fb{background-color:#4714f0}
 .bg-tw{background-color:#46A5E7}
 .bg-wa{background-color:#00BD29}
 .btn{color: #fff !important}
@@ -106,15 +106,14 @@ body {
 }
 
 
-
 div#myImage {
     position: absolute;
     /* background-color: #fff; */
     background-color: transparent;
-    top: 21.4%;
-    left: 35%;
-    height: 31%;
-    width: 31%;
+    top: 21.72%;
+    left: 35.5%;
+    height: 30%;
+    width: 30%;
     z-index: 2;
     overflow: hidden;
     text-align: center;
@@ -136,7 +135,7 @@ img#myImageTag {
     font-weight: 600;
     text-transform: uppercase;
     top: 56.3%;
-    left: 31.9%;
+    left: 30%;
     height: 4.6%;
     width: 35.7%;
     z-index: 2;
@@ -161,7 +160,10 @@ img#myImageTag {
         line-height: 1;
         /* color: #fa9236; */
     }
- 
+    .churchOut{
+        font-size: 2.2vw;
+        line-height: 1.6;
+    }
 }
 .form-select, .form-control {
     border-radius: 1rem 0 !important;
@@ -177,14 +179,10 @@ img#myImageTag {
 }
 
 .mk-btn{
-  background: #EA9401;
-  border-color: #EA9401;
-  background: #EA9401;
+  background: rgb(40,143,163);
+  border-color: #288FA3;
+  background: linear-gradient(0deg, rgba(40,143,163,1) 0%, rgba(31,148,179,1) 100%);
 }
 .mk-btn:hover{
-  border-color: #EA9401;
-}
-.download-button:hover{
-    background-color: #ffa202 
-    !important;
+  border-color: #288FA3;
 }

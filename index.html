@@ -21,7 +21,7 @@
         </div>
 
         <form action="" method="POST" enctype="multipart/form-data">
-            <h1 class="h5 mt-3 mb-3 fw-bold text-light ms-5" style="text-align: center; text-transform: uppercase;">Create Your Personalized DP</h1>
+            <h1 class="h6 mt-3 mb-3 fw-bold text-light ms-5" style="text-align: center; text-transform: uppercase;">Create Your Personalized DP</h1>
             <div class="alert alert-danger my-2 text-center py-2" id="showEmptyErrorMessage" style="display: none">
                 Please fill in all spaces
             </div>
@@ -63,15 +63,11 @@
         <button class="download-button w-100 btn btn-lg mt-3" onclick="downloadDivAsImage()" style="background-color: #EA9401;">Make My DP</button>
     </main>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Add jQuery -->
-<script>
-    $('#color').on('change', function(){
-        var color = $(this).val();
-        $('#inputName').css('color', color);
-        $('.nameOut').css('color', color); // Change the color of the name display as well
-    });
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> <!-- Corrected HTML2Canvas script URL -->
 
+<script>
+    // Define the downloadDivAsImage function here
     function downloadDivAsImage() {
         var inputName = document.getElementById("inputName");
         var fileDoc = document.getElementById("fileDoc");
@@ -94,7 +90,13 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
+    $(document).ready(function() {
+        $('#color').on('change', function(){
+            var color = $(this).val();
+            $('#inputName').css('color', color);
+            $('.nameOut').css('color', color); // Change the color of the name display as well
+        });
+
         var fileDoc = document.getElementById("fileDoc");
         var myImageTag = document.getElementById("myImageTag");
 
@@ -105,17 +107,18 @@
             }
         });
 
-        document.getElementById("inputName").addEventListener("input", function(e) {
-            var nameOut = document.querySelector(".nameOut");
-            nameOut.textContent = e.target.value;
+        $("#inputName").on("input", function(e) {
+            $(".nameOut").text($(this).val());
         });
-    });
-    $("#inputName").on("keyup change", function(e) {
-        $(".nameOut").text($(this).val());
-    });
 
-    $("#myImage").click(() => {
-        $("#fileDoc").click();
+        $("#myImage").click(() => {
+            $("#fileDoc").click();
+        });
+
+        // Handle touch events on #myImage for mobile devices
+        $("#myImage").on("touchstart", () => {
+            $("#fileDoc").click();
+        });
     });
 </script>
 </html>
